@@ -1,23 +1,4 @@
 
-
-
-var pageCanvas = document.querySelector("#pageCanvas");
-
-pageCanvas.addEventListener("mousemove", updateDisplay, false);
-pageCanvas.addEventListener("mouseenter", updateDisplay, false);
-pageCanvas.addEventListener("mouseleave", updateDisplay, false);
-pageCanvas.addEventListener("click", cliked, false);
-
-var mouseX = 0;
-var mouseY = 0;
-
-var polX;
-var polY;
-
-var fail = new Audio('fail.wav');
-var success = new Audio('success.wav');
-
-
 function getRandomInt(min, max) {
 	// Questa funzione genera un numero intero random contenuto fra min e max inclusi
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -39,57 +20,23 @@ function generateVariables (){
 	colore_cerchio = "#FF3300";
 
 	pos_x =((Math.random() * 100) + 1 )/100; // posizione x e y random del poligono
-	pos_y = ((Math.random() * 100) + 1 )/100; 
+	pos_y= ((Math.random() * 100) + 1 )/100; 
 
 }
 
 // eseguo le funzioni una volta per inizializzare la pagina (aggiornando le variabili)
 generateVariables ();
-drawCanvas(mouseX ,mouseY);
+drawCanvas();
 
 
 
-function updateDisplay(event) {
-	mouseX = event.pageX;
-	mouseY = event.pageY;
-	drawCanvas(mouseX ,mouseY);
-}
 
-
+// eseguo le funzioni ogni volta che la barra sapziatrice viene premuta (aggiornando le variabili)
 document.body.onkeyup = function(e){
     if(e.keyCode == 32){
     	generateVariables();
-    	drawCanvas(mouseX ,mouseY);
+    	drawCanvas();
     }
-}
-
-
-
-
-
-// eseguo le funzioni ogni volta che la il mouse viene premuto(aggiornando le variabili)
-function cliked(){
-
-
-	distanceBtw= distance(mouseX, mouseY , polX,polY)
-	console.log(distanceBtw,mouseX, mouseY,polX,polY)
-
-
-    if(distanceBtw < diametro_costruzione_poligono*0.6){
-    	generateVariables();
-    	drawCanvas(mouseX ,mouseY);
-    	var success = new Audio('success.wav');
-    	success.play();
-		
-    }
-    else{
-    	var fail = new Audio('fail.wav');
-
-    	fail.play();
-
-		
-    }
-    
 }
 
 
@@ -104,7 +51,7 @@ var w = document.querySelector("#width"),
     calls = 0;
 
 // window.resize callback function e funzione di disengo del canvas
-function drawCanvas(mouseX ,mouseY) {
+function drawCanvas() {
 
   // leggo le dimensioni della finestra 
   w = window.innerWidth;
@@ -118,10 +65,10 @@ function drawCanvas(mouseX ,mouseY) {
   targhet_canvas.height = h;
 
   // disegno il poligono 
-  drawPoligon(targhet_canvas_id , pos_x , pos_y , lati , diametro_costruzione_poligono, rotazione , true, true, colore_poligono);
- 
+  drawPoligon(targhet_canvas_id , pos_x , pos_y , lati , diametro_costruzione_poligono, rotazione , true, colore_poligono);
+
   // disegno il cerchio 
-  drawPoligon(targhet_canvas_id , mouseX ,mouseY  , 1 , diametro_costruzione_cerchio, 0, false, false, colore_cerchio);
+  drawPoligon(targhet_canvas_id , 0.5 , 0.5 , 1 , diametro_costruzione_cerchio, 0, true, colore_cerchio);
   
 }
 
@@ -150,16 +97,8 @@ function clamp(n, minn, maxn){
 }
 
 
-function distance(x1,y1,x2,y2){
-	//distance between two points
-	return Math.hypot(x2-x1, y2-y1);
-}
 
-
-
-
-
-function drawPoligon(targhet_canvas_id ,pos_x,pos_y , n_faces, outer_diameter, rotation, percent_pos,storePos, colour ) {
+function drawPoligon(targhet_canvas_id ,pos_x,pos_y , n_faces, outer_diameter, rotation, percent_pos, colour ) {
 	// funzione che disegna il poligono 
 
 	var targhet_canvas = document.getElementById(targhet_canvas_id)
@@ -172,16 +111,7 @@ function drawPoligon(targhet_canvas_id ,pos_x,pos_y , n_faces, outer_diameter, r
 		// calcolo la posizione del poligono proporzionalmente alla dimensione del canvas pos_x e pos_y vanno da 0 a 1 (0.5 è il centro della pagina)
 		pos_x = clamp (targhet_canvas.width * pos_x, outer_diameter/2,targhet_canvas.width-(outer_diameter/2) );
 		pos_y = clamp (targhet_canvas.height * pos_y, outer_diameter/2,targhet_canvas.height-(outer_diameter/2) );
-
 	}
-
-	if (storePos) {
-		//save the positions of the poligon to ceck against the mouse
-		polX = pos_x;
-		polY = pos_y;
-
-	}
-
 
 	canvas_context.beginPath(); // inizia il disegno 
 
