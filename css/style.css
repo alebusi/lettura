@@ -1,9 +1,10 @@
 body {
-  margin: 0;
-  overflow: hidden;
-}
-#pageCanvas{
-  background-color: #FFFFF9;
-}
-
-
+  font-family:TestMeSans02-Regular,Arial,sanserif;
+  font-size:70px;
+  font-weight:bold;
+  text-align:center;
+  background-color: white;
+  margin-top:500px;
+  color: #0000ff;
+  text-transform: uppercase;
+  }
