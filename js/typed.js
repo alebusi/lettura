@@ -176,6 +176,7 @@
 					// array position to next string
 					else if (curStrPos <= self.stopNum){
 						clearTimeout(clear);
+						curStrPos = 0;
 						var clear = self.arrayPos = self.arrayPos+1;
 						// must pass new array position in this instance
 						// instead of using global arrayPos
