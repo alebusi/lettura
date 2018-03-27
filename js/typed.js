@@ -157,7 +157,7 @@
 					// }
 					//every other time, delete the whole typed string
 					// else{
-					//	self.stopNum = 0;
+						self.stopNum = 20;
 					// }
 
 					// ----- continue important stuff ----- //
