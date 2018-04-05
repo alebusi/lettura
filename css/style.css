@@ -6,6 +6,8 @@ body {
   background-color: white;
   margin-top:500px;
   margin-left:350px;
+  border-bottom: solid 2px red;
+  padding-bottom: 12px;
   color: #000000;
   text-transform: uppercase;
   }
