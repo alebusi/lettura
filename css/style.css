@@ -1,7 +1,8 @@
 body {
   font-family:TestMeSans02,Arial,sanserif;
   font-size:70px;
-  font-weight:normal;
+  font-weight:bold;
+  letter-spacing:5px;
   text-align:left;
   background-color: white;
   margin-top:500px;
