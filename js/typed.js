@@ -157,7 +157,7 @@
 					// }
 					//every other time, delete the whole typed string
 					// else{
-						self.stopNum = 20;
+						self.stopNum = 20;  // modified by Paolo
 					// }
 
 					// ----- continue important stuff ----- //
@@ -176,7 +176,7 @@
 					// array position to next string
 					else if (curStrPos <= self.stopNum){
 						clearTimeout(clear);
-						curStrPos = 0;
+						curStrPos = 0;  // modified by Paolo
 						var clear = self.arrayPos = self.arrayPos+1;
 						// must pass new array position in this instance
 						// instead of using global arrayPos
